@@ -18,6 +18,9 @@ public class SudokuController {
     @FXML
     private Button btnLimpiar;
 
+    @FXML
+    private Button btnEjemplo;
+
     private TextField[][] celdas;
     private TableroSudoku tablero;
     private Validador validador;
@@ -119,14 +122,42 @@ public class SudokuController {
         tablero.limpiarTablero();
     }
 
+    @FXML
+    private void cargarEjemplo() {
+        limpiarTablero();
+
+        // Sudoku de ejemplo (nivel medio)
+        int[][] ejemplo = {
+                {5, 3, 0, 0, 7, 0, 0, 0, 0},
+                {6, 0, 0, 1, 9, 5, 0, 0, 0},
+                {0, 9, 8, 0, 0, 0, 0, 6, 0},
+                {8, 0, 0, 0, 6, 0, 0, 0, 3},
+                {4, 0, 0, 8, 0, 3, 0, 0, 1},
+                {7, 0, 0, 0, 2, 0, 0, 0, 6},
+                {0, 6, 0, 0, 0, 0, 2, 8, 0},
+                {0, 0, 0, 4, 1, 9, 0, 0, 5},
+                {0, 0, 0, 0, 8, 0, 0, 7, 9}
+        };
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (ejemplo[i][j] != 0) {
+                    celdas[i][j].setText(String.valueOf(ejemplo[i][j]));
+                }
+            }
+        }
+    }
+
     private boolean capturarTablero() {
         tablero.limpiarTablero();
+        boolean hayNumeros = false;
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 String texto = celdas[i][j].getText().trim();
 
                 if (!texto.isEmpty()) {
+                    hayNumeros = true;
                     try {
                         int valor = Integer.parseInt(texto);
                         if (valor < 1 || valor > 9) {
@@ -145,6 +176,13 @@ public class SudokuController {
                     }
                 }
             }
+        }
+
+        if (!hayNumeros) {
+            mostrarAlerta("Error",
+                    "Debes ingresar al menos un número inicial para resolver el Sudoku.",
+                    Alert.AlertType.WARNING);
+            return false;
         }
 
         return true;

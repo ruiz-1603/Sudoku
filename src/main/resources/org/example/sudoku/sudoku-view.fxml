@@ -17,10 +17,10 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Solucionador de Sudoku"
+    <Label text="Sudoku"
            style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
 
-    <Label text="Ingresa los números iniciales (1-9) y presiona Resolver"
+    <Label text="Ingrese los numeros iniciales (1-9) o cargue un ejemplo y presiona al final presione Resolver"
            style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
 
     <GridPane fx:id="gridSudoku"
@@ -35,6 +35,12 @@
                 style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 30;"
                 prefWidth="150"/>
 
+        <Button fx:id="btnEjemplo"
+                text="Cargar Ejemplo"
+                onAction="#cargarEjemplo"
+                style="-fx-font-size: 16px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 10 30;"
+                prefWidth="150"/>
+
         <Button fx:id="btnLimpiar"
                 text="Limpiar"
                 onAction="#limpiarTablero"
@@ -42,7 +48,7 @@
                 prefWidth="150"/>
     </HBox>
 
-    <Label text="Verde: números iniciales | Azul: números resueltos"
+    <Label text=""
            style="-fx-font-size: 12px; -fx-text-fill: #999;"/>
 
 </VBox>
