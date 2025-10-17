@@ -6,9 +6,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="SudokuController" alignment="CENTER" spacing="20"
+      style="-fx-background-color: #f5f5f5;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
-</AnchorPane>
+    <!-- Título -->
+    <Label text="RESOLVEDOR DE SUDOKU" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+    <!-- Grid del Sudoku -->
+    <GridPane fx:id="sudokuGrid" alignment="CENTER" hgap="2" vgap="2"
+              style="-fx-background-color: #2c3e50; -fx-padding: 3;">
+    </GridPane>
+
+    <!-- Botones -->
+    <HBox alignment="CENTER" spacing="15">
+        <Button fx:id="btnResolver" text="Resolver" onAction="#resolver"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;">
+            <font>
+                <Font name="System Bold" size="14"/>
+            </font>
+        </Button>
+
+        <Button fx:id="btnValidar" text="Validar" onAction="#validar"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;">
+            <font>
+                <Font name="System Bold" size="14"/>
+            </font>
+        </Button>
+
+        <Button fx:id="btnLimpiar" text="Limpiar" onAction="#limpiar"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;">
+            <font>
+                <Font name="System Bold" size="14"/>
+            </font>
+        </Button>
+    </HBox>
+
+    <!-- Mensaje de estado -->
+    <Label fx:id="lblMensaje" text="" style="-fx-font-size: 14px; -fx-text-fill: #2c3e50;"/>
+</VBox>
