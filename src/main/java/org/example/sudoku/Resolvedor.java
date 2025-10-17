@@ -11,35 +11,33 @@ public class Resolvedor {
         validador = new Validador(tablero);
     }
 
-    public boolean Resolver() {
-        Point primeraCeldaVacia = tablero.SiguienteCeldaVacia(new Point(0, 0));
+    public boolean resolver() {
+        Point primeraCeldaVacia = tablero.siguienteCeldaVacia(new Point(0, 0));
         if (primeraCeldaVacia == null) {
-            return tablero.EstaCompleto();
+            return tablero.estaCompleto();
         }
-        return ResolverConBackTracking(primeraCeldaVacia);
+        return resolverConBackTracking(primeraCeldaVacia);
     }
 
-    private boolean ResolverConBackTracking(Point actual) {
+    private boolean resolverConBackTracking(Point actual) {
         if (actual == null) {
-            return tablero.EstaCompleto();
+            return tablero.estaCompleto();
         }
 
         for (int numero = 1; numero <= 9; numero++) {
-            if (validador.EsValido(actual, numero)) {
-                tablero.Colocar(actual, numero);
+            if (validador.esValido(actual, numero)) {
+                tablero.colocar(actual, numero);
 
-                Point siguiente = tablero.SiguienteCeldaVacia(actual);
+                Point siguiente = tablero.siguienteCeldaVacia(actual);
 
-                if (ResolverConBackTracking(siguiente)) {
+                if (resolverConBackTracking(siguiente)) {
                     return true;
                 }
 
-                tablero.Limpiar(actual);
+                tablero.limpiar(actual);
             }
         }
 
         return false;
     }
-
-
 }

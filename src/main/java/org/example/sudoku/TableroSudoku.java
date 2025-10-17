@@ -50,7 +50,7 @@ public class TableroSudoku {
         return false;
     }
 
-    public boolean EstaCompleto() {
+    public boolean estaCompleto() {
         for (int i = 0; i < TAM; i++) {
             for (int j = 0; j < TAM; j++) {
                 if (tablero[i][j] == 0) {
@@ -61,7 +61,7 @@ public class TableroSudoku {
         return true;
     }
 
-    public Point SiguienteCeldaVacia(Point actual) {
+    public Point siguienteCeldaVacia(Point actual) {
         int fila = actual.x;
         int columna = actual.y;
 
@@ -75,13 +75,13 @@ public class TableroSudoku {
         return null;
     }
 
-    public void Colocar(Point posicion, int numero) {
+    public void colocar(Point posicion, int numero) {
         if (posicion != null && numero >= 1 && numero <= 9) {
             tablero[posicion.x][posicion.y] = numero;
         }
     }
 
-    public void Limpiar(Point posicion) {
+    public void limpiar(Point posicion) {
         if (posicion != null && !esInicial[posicion.x][posicion.y]) {
             tablero[posicion.x][posicion.y] = 0;
         }

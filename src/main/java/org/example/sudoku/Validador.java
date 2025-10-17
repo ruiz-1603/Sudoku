@@ -1,10 +1,17 @@
 package org.example.sudoku;
 
+import java.awt.*;
+
 public class Validador {
     private TableroSudoku tablero;
 
     public Validador(TableroSudoku miTablero) {
         tablero = miTablero;
+    }
+
+    public boolean esValido(Point posicion, int numero) {
+        if (posicion == null) return false;
+        return esMovimientoValido(posicion.x, posicion.y, numero);
     }
 
     public boolean esMovimientoValido(int fila, int columna, int numero) {
