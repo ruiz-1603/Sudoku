@@ -45,7 +45,6 @@ public class SudokuController {
                 celda.setAlignment(Pos.CENTER);
                 celda.setStyle(obtenerEstiloCelda(i, j));
 
-                // Limitar entrada a un solo dígito del 1-9
                 final int fila = i;
                 final int col = j;
                 celda.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -58,7 +57,6 @@ public class SudokuController {
 
                 celdas[i][j] = celda;
 
-                // Crear contenedor para cada celda
                 StackPane contenedor = new StackPane(celda);
                 gridSudoku.add(contenedor, j, i);
             }
@@ -68,7 +66,6 @@ public class SudokuController {
     private String obtenerEstiloCelda(int fila, int col) {
         String estilo = "-fx-font-size: 18px; -fx-font-weight: bold;";
 
-        // Bordes más gruesos para separar los cuadros 3x3
         String borderTop = ((fila % 3) == 0) ? "2px" : "0.5px";
         String borderLeft = ((col % 3) == 0) ? "2px" : "0.5px";
         String borderBottom = (fila == 8) ? "2px" : "0.5px";
@@ -85,28 +82,26 @@ public class SudokuController {
 
     @FXML
     private void resolverSudoku() {
-        // Capturar valores del tablero
+
         if (!capturarTablero()) {
             return;
         }
 
-        // Validar tablero inicial
         if (!validador.validarTableroInicial()) {
             mostrarAlerta("Error", "El tablero inicial no es válido. Hay números repetidos en filas, columnas o cuadros.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Crear copia del tablero para resolver
+
         int[][] tableroOriginal = copiarTablero();
 
-        // Intentar resolver
         if (resolvedor.resolver()) {
             mostrarSolucion();
             mostrarAlerta("Éxito", "¡Sudoku resuelto correctamente!", Alert.AlertType.INFORMATION);
         } else {
-            // Restaurar tablero original si no hay solución
             tablero.cargarTablero(tableroOriginal);
-            mostrarAlerta("Sin solución", "No existe solución para este Sudoku.", Alert.AlertType.WARNING);
+            restaurarVistaTablero(tableroOriginal);
+            mostrarAlerta("Sin solución", "No existe solución para este Sudoku.\n\nEl tablero ha sido restaurado a su estado inicial.", Alert.AlertType.WARNING);
         }
     }
 
@@ -126,7 +121,6 @@ public class SudokuController {
     private void cargarEjemplo() {
         limpiarTablero();
 
-        // Sudoku de ejemplo (nivel medio)
         int[][] ejemplo = {
                 {5, 3, 0, 0, 7, 0, 0, 0, 0},
                 {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -195,7 +189,6 @@ public class SudokuController {
             for (int j = 0; j < 9; j++) {
                 celdas[i][j].setText(String.valueOf(solucion[i][j]));
 
-                // Resaltar celdas resueltas vs iniciales
                 if (tablero.esInicial(i, j)) {
                     celdas[i][j].setStyle(obtenerEstiloCelda(i, j) +
                             "-fx-background-color: #E8F5E9; -fx-text-fill: #1B5E20;");
@@ -205,6 +198,20 @@ public class SudokuController {
                             "-fx-background-color: #BBDEFB; -fx-text-fill: #0D47A1;");
                     celdas[i][j].setEditable(false);
                 }
+            }
+        }
+    }
+
+    private void restaurarVistaTablero(int[][] tableroOriginal) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (tableroOriginal[i][j] != 0) {
+                    celdas[i][j].setText(String.valueOf(tableroOriginal[i][j]));
+                } else {
+                    celdas[i][j].clear();
+                }
+                celdas[i][j].setStyle(obtenerEstiloCelda(i, j));
+                celdas[i][j].setEditable(true);
             }
         }
     }

@@ -23,7 +23,7 @@ public class Validador {
     }
 
     private boolean revisarFila(int fila, int numero) {
-        for (int col = 0; col < TableroSudoku.TAM; col++) {
+        for (int col = 0; col < TableroSudoku.tam; col++) {
             if (tablero.getValor(fila, col) == numero)
                 return false;
         }
@@ -31,7 +31,7 @@ public class Validador {
     }
 
     private boolean revisarColumna(int columna, int numero) {
-        for (int fil = 0; fil < TableroSudoku.TAM; fil++) {
+        for (int fil = 0; fil < TableroSudoku.tam; fil++) {
             if (tablero.getValor(fil, columna) == numero)
                 return false;
         }
@@ -39,11 +39,11 @@ public class Validador {
     }
 
     private boolean revisarCuadro(int fila, int columna, int numero) {
-        int filaInicio = (fila / TableroSudoku.TAM_CUADRO) * TableroSudoku.TAM_CUADRO;
-        int colInicio = (columna / TableroSudoku.TAM_CUADRO) * TableroSudoku.TAM_CUADRO;
+        int filaInicio = (fila / TableroSudoku.tamCuadro) * TableroSudoku.tamCuadro;
+        int colInicio = (columna / TableroSudoku.tamCuadro) * TableroSudoku.tamCuadro;
 
-        for (int i = filaInicio; i < filaInicio + TableroSudoku.TAM_CUADRO; i++) {
-            for (int j = colInicio; j < colInicio + TableroSudoku.TAM_CUADRO; j++) {
+        for (int i = filaInicio; i < filaInicio + TableroSudoku.tamCuadro; i++) {
+            for (int j = colInicio; j < colInicio + TableroSudoku.tamCuadro; j++) {
                 if (tablero.getValor(i, j) == numero)
                     return false;
             }
@@ -52,8 +52,8 @@ public class Validador {
     }
 
     public boolean validarTableroInicial() {
-        for (int fila = 0; fila < TableroSudoku.TAM; fila++) {
-            for (int col = 0; col < TableroSudoku.TAM; col++) {
+        for (int fila = 0; fila < TableroSudoku.tam; fila++) {
+            for (int col = 0; col < TableroSudoku.tam; col++) {
                 int valor = tablero.getValor(fila, col);
                 if (valor != 0) {
                     tablero.ponerValor(fila, col, 0);

@@ -14,14 +14,14 @@ public class Resolvedor {
     public boolean resolver() {
         Point primeraCeldaVacia = tablero.siguienteCeldaVacia(new Point(0, 0));
         if (primeraCeldaVacia == null) {
-            return tablero.estaCompleto();
+            return tablero.esSolucion();
         }
         return resolverConBackTracking(primeraCeldaVacia);
     }
 
     private boolean resolverConBackTracking(Point actual) {
         if (actual == null) {
-            return tablero.estaCompleto();
+            return tablero.esSolucion();
         }
 
         for (int numero = 1; numero <= 9; numero++) {
