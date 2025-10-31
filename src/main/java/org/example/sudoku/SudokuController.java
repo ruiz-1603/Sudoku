@@ -24,13 +24,13 @@ public class SudokuController {
     private TextField[][] celdas;
     private TableroSudoku tablero;
     private Validador validador;
-    private Resolvedor resolvedor;
+    private SudokuSolucion resolvedor;
 
     @FXML
     public void initialize() {
         tablero = new TableroSudoku();
         validador = new Validador(tablero);
-        resolvedor = new Resolvedor(tablero);
+        resolvedor = new SudokuSolucion(tablero);
         celdas = new TextField[9][9];
 
         crearTablero();
